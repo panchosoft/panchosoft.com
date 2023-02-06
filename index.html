@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Panchosoft - Francisco Leyva</title>
+  <meta name="description" content="Welcome to Panchosoft!" />
+  <meta name="keywords" content="web development, graphic design, portfolio, blog, Francisco Leyva, Panchosoft">
+  <meta name="robots" content="index,follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+</head>
+
+<body>
+  <div class="noise"></div>
+
+  <header aria-labelledby="header-section">
+    <div class="inner">
+      <div class="heading-svg has-sticker">
+        <svg>
+          <filter id="starlight-extinction">
+            <feTurbulence type="turbulence" numOctaves="9" result="turbulenceOut">
+              <animate attributeName="baseFrequency" dur="30s" from="0.5" to="0.002" repeatCount="indefinite"></animate>
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="turbulenceOut" xChannelSelector="B" yChannelSelector="B"
+              scale="20" result="myComposite">
+              <animate attributeName="scale" dur="30s" from="0" to="50" repeatCount="indefinite"></animate>
+            </feDisplacementMap>
+          </filter>
+          <use id="header-svg" href="images/header.svg#img"></use>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <section aria-labelledby="profile-section">
+    <div class="inner profile" id="profile-section">
+      <figure class="profile-picture">
+        <img draggable="false" src="images/profile.jpg"
+          alt="A portrait painting of a grey cat wearing glasses, a tie, and a black suit against a horizon background with clouds."
+          title="A portrait painting by Leonardo da Vinci depicts a grey cat wearing glasses, a tie, and a black suit against a horizon background with clouds."
+          loading="lazy" />
+      </figure>
+      <div class="profile-text">
+        <span class="profile-text-name">FRANCISCO LEYVA</span>
+        <img title="Certified authentic and undeniably awesome - this is the official seal of a verified account."
+          src="images/verified.png" class="verified-logo" alt="verified logo" loading="lazy" /><br />
+        <div class="typewriter" id="typewriter">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav aria-labelledby="social-nav-section">
+    <div class="inner" id="social-nav-section">
+      <ul class="social-list">
+        <li>
+          <a href="https://twitter.com/panchosoft" target="_blank" rel="follow">
+            <svg aria-hidden="true" draggable="false" focusable="false" title="Twitter" target="twitter">
+              <use xlink:href='images/social/twitter.svg#img' href="images/social/twitter.svg#img"></use>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/franciscoleyva/" target="_blank" rel="follow">
+            <svg aria-hidden="true" focusable="false" title="LinkedIn" target="linkedin">
+              <use xlink:href='images/social/linkedin.svg#img' href="images/social/linkedin.svg#img"></use>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/@panchosoft_" target="_blank" rel="follow">
+            <svg aria-hidden="true" focusable="false" title="Youtube" target="youtube">
+              <use xlink:href='images/social/youtube.svg#img' href="images/social/youtube.svg#img"></use>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/panchosoft" target="_blank" rel="follow">
+            <svg aria-hidden="true" focusable="false" title="GitHub" target="github">
+              <use xlink:href='images/social/github.svg#img' href="images/social/github.svg#img"></use>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://instagram.com/panchosoft" target="_blank" rel="follow">
+            <svg aria-hidden="true" focusable="false" title="Instagram" target="instagram">
+              <use xlink:href='images/social/instagram.svg#img' href="images/social/instagram.svg#img"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- This is the main navigation menu for the website -->
+  <nav aria-labelledby="nav-main">
+    <div class="inner centered-div" id="nav-main">
+      <ul class="main-list">
+        <li>
+          <a href="https://www.linkedin.com/in/franciscoleyva/" target="_blank" rel="follow">LinkedIn</a>
+        </li>
+        <li>
+          <a href="https://github.com/panchosoft?tab=repositories" target="_blank" rel="follow">Git Repositories</a>
+        </li>
+        <li>
+          <a href="https://panchosoft.com/blog" target="_blank" rel="follow">Blog (RIP 2012) </a>
+        </li>
+        <li>
+          <a href="https://www.credly.com/users/panchosoft/badges" target="_blank" rel="follow">Credly</a>
+        </li>
+        <li class="allsides-2">
+          <a href="https://covid19mexico.net" target="_blank" rel="follow">Covid 19 M&eacute;xico</a>
+        </li>
+        <li class="allsides-2">
+          <a href="https://labs.panchosoft.com/" target="_blank" rel="follow">Labs</a>
+        </li>
+        <li class="allsides-2">
+          <a href="https://labs.panchosoft.com/frog/index.html" target="_blank" rel="follow">Frog (HTML Canvas)</a>
+        </li>
+        <li class="allsides-2" data-text="AppSpy">
+          <a href="https://labs.panchosoft.com/appspy/index.html" target="_blank" rel="follow">AppSpy</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- <main></main> -->
+  <footer>
+    <div class="inner centered-div footer">
+      ©<span id="year"></span>
+      <a href="https://github.com/panchosoft/panchosoft.com" target="_blank">v0.1.0</a>
+    </div>
+  </footer>
+  <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
