@@ -1,7 +1,7 @@
 {
   "name": "panchosoft",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.1",
   "type": "module",
   "description": "Panchosoft.com home page",
   "keywords": [
@@ -15,6 +15,6 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^4.1.2"
+    "vite": "^4.4.9"
   }
 }
