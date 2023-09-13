@@ -141,6 +141,10 @@ img {
   cursor: crosshair;
 }
 
+.heading-svg svg:not(:hover) {
+  animation: darken .18s backwards;
+}
+
 /* Heart beat animation */
 @keyframes shine {
   25% {
@@ -162,6 +166,24 @@ img {
     filter: drop-shadow(0 0 8.75rem rgba(81, 140, 163, 0.8));
     /* filter: url('/images/pattern.svg#filter'); */
     /* filter: brightness(50%); */
+  }
+}
+
+@keyframes darken {
+  25% {
+    filter: drop-shadow(0 0 8.75rem rgba(81, 140, 163, .8))
+  }
+
+  50% {
+    filter: drop-shadow(0 0 5.75rem rgba(81, 140, 163, .8))
+  }
+
+  70% {
+    filter: drop-shadow(0 0 3.75rem rgba(81, 140, 163, .8))
+  }
+
+  to {
+    filter: drop-shadow(0 0 1.75rem rgba(81, 140, 163, .8))
   }
 }
 
