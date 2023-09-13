@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/415730/218347483-c3096b4c-4911-4883-b18f-b21e327ff08e.png)
+![image](https://github.com/panchosoft/panchosoft.com/assets/415730/725671c4-56a2-4d2b-bb9d-2188a3ea5750)
 
 # Panchosoft.com
 
