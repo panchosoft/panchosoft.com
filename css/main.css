@@ -202,7 +202,7 @@ img {
   justify-content: center;
   /* flex-direction: column; */
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   align-content: center;
   z-index: 50;
   animation: fadein 3s;
@@ -220,9 +220,19 @@ img {
 
 .profile-picture img:hover {
   transform: scale(1.05);
-  cursor: wait;
+  cursor: help;
   filter: drop-shadow(0 0 1em #c3d7bf);
   transition: all ease-out 1s;
+}
+
+@media only screen and (max-width: 600px) {
+  .profile-picture {
+    width: 100%;
+    text-align: center;
+  }
+  .profile-text {
+    text-align: center;
+  }
 }
 
 .profile .verified-logo {
@@ -276,7 +286,7 @@ img {
   overflow: hidden;
   /* Ensures the content is not revealed until the animation */
   border-right: .15em solid #00ff41;
-  box-shadow: 0 8px 5px rgba(92, 177, 53, 0.514);
+  /* box-shadow: 0 8px 5px rgba(92, 177, 53, 0.514); */
   /* clip-path: inset(0px -15px 0px 0px); */
   /* The typwriter cursor */
   white-space: nowrap;
@@ -284,6 +294,7 @@ img {
   margin: 0 0;
   /* Gives that scrolling effect as the typing happens */
   letter-spacing: 2px;
+  line-height: normal;
   /* Adjust as needed */
   animation:
     typing 3.2s steps(30, end),
@@ -311,8 +322,8 @@ img {
   }
 
   50% {
-    border-color: green;
-    box-shadow: 0 8px 5px rgba(92, 177, 53, 0.514);
+    border-color: #00ff41;
+    /* box-shadow: 0 8px 5px rgba(92, 177, 53, 0.514); */
     /* clip-path: inset(0px -15px 0px 0px); */
   }
 }
@@ -414,10 +425,10 @@ img {
   min-height: clamp(40px, 50px, 60px);
   text-align: center;
   font-weight: 400;
-  letter-spacing: 1px;
-  font-size: clamp(16px, 2.5vw, 18px);
+  letter-spacing: 0.5px;
+  font-size: clamp(16px, 2.5vw, 21px);
   /* font-size: clamp(16px, 12.9577464789px + 1.4084507042vw, 20px); */
-  border-color: #38444d;
+  border-color: #38444d59;
   border-style: solid;
   border-width: 2px;
   /* background: transparent; */
@@ -444,12 +455,13 @@ img {
 @media only screen and (max-width: 600px) {
   .main-list>li {
     flex: 1 0 80%;
+    margin: 2px 14px;
   }
 }
 
 .main-list>li:hover {
   --d: 100%;
-  background-color: var(--main-bg-color);
+  /* background-color: var(--main-bg-color); */
   /* transform: scale(1.01); */
   /* text-align: left; */
   /* padding-left: 20px; */
@@ -462,14 +474,20 @@ img {
   user-select: none;
   touch-action: none;
   flex-grow: 9;
+  transition: all ease-in-out 1s;
 }
 
 .main-list li a:hover {
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   transition: all ease-in-out 1s;
   color: #1b96e9;
   /* font-weight: 700; */
   filter: drop-shadow(0 0 2em var(--main-gradient-color));
+}
+
+.main-list li a sup {
+  font-size: smaller;
+  vertical-align: top;
 }
 
 .main-list li svg {
