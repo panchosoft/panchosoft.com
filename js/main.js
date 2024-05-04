@@ -56,6 +56,6 @@ function updateYear() {
 }
 
 // Start scripts
-rotateText(["Software Programmer", "Culiac&aacute;n, Sinaloa 🇲🇽","Happy 2024!"], 7);
+rotateText(["Software Programmer", "Outer Heaven 📍🇲🇽🇺🇸"], 7);
 animateHeader();
 document.addEventListener("DOMContentLoaded", updateYear);
