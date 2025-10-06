@@ -1,20 +1,38 @@
 {
   "name": "panchosoft",
+  "version": "0.1.2",
   "private": true,
-  "version": "0.1.1",
   "type": "module",
-  "description": "Panchosoft.com home page",
+  "description": "Modern and responsive homepage for Panchosoft.com built with Vite.",
   "keywords": [
-    "panchosoft"
+    "panchosoft",
+    "vite",
+    "web",
+    "homepage",
+    "frontend"
   ],
-  "author": "Francisco LEYVA",
-  "license": "ISC",
+  "author": {
+    "name": "Francisco Leyva",
+    "url": "https://panchosoft.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/panchosoft/panchosoft.com.git"
+  },
+  "bugs": {
+    "url": "https://github.com/panchosoft/panchosoft.com/issues"
+  },
+  "homepage": "https://panchosoft.com",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^7.1.6"
+    "vite": "^7.1.9"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
