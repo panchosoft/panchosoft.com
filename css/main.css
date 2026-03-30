@@ -276,55 +276,36 @@ img {
   display: flex;
   justify-content: left;
   max-width: fit-content;
-  /* align-items: stretch; */
 }
 
 .typewriter span {
-  /* display: inline-block; */
   color: var(--main-txt-color);
-  /* font-family: Inter, monospace; */
-  overflow: hidden;
-  /* Ensures the content is not revealed until the animation */
-  border-right: .15em solid #00ff41;
-  /* box-shadow: 0 8px 5px rgba(92, 177, 53, 0.514); */
-  /* clip-path: inset(0px -15px 0px 0px); */
-  /* The typwriter cursor */
   white-space: nowrap;
-  /* Keeps the content on a single line */
-  margin: 0 0;
-  /* Gives that scrolling effect as the typing happens */
   letter-spacing: 2px;
   line-height: normal;
-  /* Adjust as needed */
-  animation:
-    typing 3.2s steps(30, end),
-    blink-caret .6s step-end infinite;
+  position: relative;
+  display: inline-block;
 }
 
-/* The typing effect */
-@keyframes typing {
-  from {
-    width: 0
-  }
-
-  to {
-    width: 100%;
-  }
+/* Cursor element */
+.typewriter .cursor {
+  display: inline-block;
+  width: 0.15em;
+  height: 1em;
+  background-color: #00ff41;
+  margin-left: 2px;
+  animation: blink-caret 0.75s step-end infinite;
+  vertical-align: text-bottom;
 }
 
-/* The typewriter cursor effect */
+/* Smooth cursor blinking */
 @keyframes blink-caret {
-
   from,
   to {
-    border-color: transparent;
-    box-shadow: none;
+    opacity: 1;
   }
-
   50% {
-    border-color: #00ff41;
-    /* box-shadow: 0 8px 5px rgba(92, 177, 53, 0.514); */
-    /* clip-path: inset(0px -15px 0px 0px); */
+    opacity: 0;
   }
 }
 

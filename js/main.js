@@ -57,11 +57,34 @@ function getCurrentAnimation() {
   return ANIMATION_CONFIG.animations.find(anim => anim.id === animId) || null;
 }
 
-// This function is used to rotate an array of strings in the element with id 'typewriter'
-// every given number of seconds. 
-function rotateText(strings, seconds) {
-  var i = 0;
-  var container = document.getElementById("typewriter");
+// Typing effect configuration
+const TYPING_CONFIG = {
+  typeSpeed: 80,        // Milliseconds per character when typing
+  deleteSpeed: 40,      // Milliseconds per character when deleting
+  pauseAfterType: 2000, // Pause after finishing typing (ms)
+  pauseAfterDelete: 500, // Pause after finishing deleting (ms)
+  cursorBlink: true     // Show blinking cursor
+};
+
+// Enhanced typewriter effect with character-by-character typing and deleting
+// Supports both legacy seconds parameter and new config object
+function rotateText(strings, secondsOrConfig) {
+  let config = {};
+
+  // Handle legacy seconds parameter for backward compatibility
+  if (typeof secondsOrConfig === "number") {
+    const displayTime = secondsOrConfig * 1000;
+    config = {
+      ...TYPING_CONFIG,
+      pauseAfterType: Math.max(1000, displayTime - 2000)
+    };
+  } else if (secondsOrConfig) {
+    config = { ...TYPING_CONFIG, ...secondsOrConfig };
+  } else {
+    config = { ...TYPING_CONFIG };
+  }
+
+  const container = document.getElementById("typewriter");
 
   if (!container) {
     console.error("The container element with id 'typewriter' could not be found.");
@@ -73,25 +96,59 @@ function rotateText(strings, seconds) {
     return;
   }
 
-  if (!seconds || typeof seconds !== "number") {
-    console.error("Invalid value provided for seconds. Please provide a number.");
-    return;
+  // Create text span and cursor
+  const textSpan = document.createElement("span");
+  textSpan.setAttribute("id", "rotatingText");
+  textSpan.setAttribute("aria-live", "polite");
+  container.appendChild(textSpan);
+
+  if (config.cursorBlink) {
+    const cursor = document.createElement("span");
+    cursor.className = "cursor";
+    cursor.setAttribute("aria-hidden", "true");
+    container.appendChild(cursor);
   }
 
-  var element = document.createElement("span");
-  element.innerHTML = strings[i];
-  element.setAttribute("id", "rotatingText");
-  container.appendChild(element);
-  i = (i + 1) % strings.length;
+  let currentIndex = 0;
+  let currentText = "";
+  let isDeleting = false;
+  let charIndex = 0;
 
-  setInterval(function () {
-    var newElement = document.createElement("span");
-    newElement.innerHTML = strings[i];
-    newElement.setAttribute("id", "rotatingText");
-    container.replaceChild(newElement, element);
-    element = newElement;
-    i = (i + 1) % strings.length;
-  }, seconds * 1000);
+  function type() {
+    const targetText = strings[currentIndex];
+
+    if (!isDeleting) {
+      // Typing mode
+      if (charIndex < targetText.length) {
+        currentText = targetText.substring(0, charIndex + 1);
+        textSpan.textContent = currentText;
+        charIndex++;
+        setTimeout(type, config.typeSpeed + Math.random() * 50); // Add slight randomness
+      } else {
+        // Finished typing, pause then start deleting
+        setTimeout(() => {
+          isDeleting = true;
+          type();
+        }, config.pauseAfterType);
+      }
+    } else {
+      // Deleting mode
+      if (charIndex > 0) {
+        currentText = targetText.substring(0, charIndex - 1);
+        textSpan.textContent = currentText;
+        charIndex--;
+        setTimeout(type, config.deleteSpeed);
+      } else {
+        // Finished deleting, move to next string
+        isDeleting = false;
+        currentIndex = (currentIndex + 1) % strings.length;
+        setTimeout(type, config.pauseAfterDelete);
+      }
+    }
+  }
+
+  // Start the typing effect
+  type();
 }
 
 function updateYear() {
