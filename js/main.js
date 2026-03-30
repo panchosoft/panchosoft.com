@@ -1,7 +1,7 @@
 // Animation configuration
 const ANIMATION_CONFIG = {
   // Set the default animation to use on page load (null = no animation)
-  defaultAnimation: 'null',
+  defaultAnimation: null,
 
   // Available animations in cycle order
   animations: [
