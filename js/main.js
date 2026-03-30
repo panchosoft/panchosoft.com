@@ -1,16 +1,60 @@
-// This function is used to toggle the filter attribute on the #header-svg element when clicked.
+// Animation configuration
+const ANIMATION_CONFIG = {
+  // Set the default animation to use on page load (null = no animation)
+  defaultAnimation: 'null',
+
+  // Available animations in cycle order
+  animations: [
+    { id: null, name: 'None', description: 'No filter effect' },
+    { id: 'starlight-extinction', name: 'Starlight Extinction', description: 'Turbulent displacement effect' }
+  ]
+};
+
+// This function cycles through SVG filter animations on the header element when clicked.
+// Click repeatedly to cycle through all available animations.
 function animateHeader() {
   var h = document.querySelector("#header-svg");
-  if (h) {
-    h.addEventListener('click', () => {
-      if (h.hasAttribute('filter'))
-        h.removeAttribute('filter');
-      else
-        h.setAttribute('filter', 'url(#starlight-extinction)');
-    });
-  } else {
+  if (!h) {
     console.error("AnimateHeader: header-svg element not found.");
+    return;
   }
+
+  // Initialize with default animation
+  let currentIndex = ANIMATION_CONFIG.animations.findIndex(
+    anim => anim.id === ANIMATION_CONFIG.defaultAnimation
+  );
+  if (currentIndex === -1) currentIndex = 0;
+
+  // Apply default animation if set
+  if (ANIMATION_CONFIG.defaultAnimation) {
+    h.setAttribute('filter', `url(#${ANIMATION_CONFIG.defaultAnimation})`);
+  }
+
+  // Add click event to cycle through animations
+  h.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % ANIMATION_CONFIG.animations.length;
+    const animation = ANIMATION_CONFIG.animations[currentIndex];
+
+    if (animation.id === null) {
+      h.removeAttribute('filter');
+      console.log(`Animation: ${animation.name}`);
+    } else {
+      h.setAttribute('filter', `url(#${animation.id})`);
+      console.log(`Animation: ${animation.name} - ${animation.description}`);
+    }
+  });
+}
+
+// Get current animation info (useful for debugging or UI display)
+function getCurrentAnimation() {
+  const h = document.querySelector("#header-svg");
+  if (!h) return null;
+
+  const filter = h.getAttribute('filter');
+  if (!filter) return ANIMATION_CONFIG.animations[0];
+
+  const animId = filter.match(/#([^)]+)/)?.[1];
+  return ANIMATION_CONFIG.animations.find(anim => anim.id === animId) || null;
 }
 
 // This function is used to rotate an array of strings in the element with id 'typewriter'

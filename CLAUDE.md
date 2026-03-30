@@ -34,11 +34,19 @@ npm run preview
 **Vanilla JavaScript approach**: No frameworks or build-time transpilation. The codebase uses plain DOM manipulation and ES6 modules.
 
 **Key functions in main.js**:
-- `animateHeader()` - Toggles SVG filter animation on header click
+- `animateHeader()` - Cycles through SVG filter animations on header click
 - `rotateText(strings, seconds)` - Cycles through text array in typewriter element
 - `updateYear()` - Updates copyright year dynamically
+- `getCurrentAnimation()` - Returns current animation info (debugging/UI helper)
 
-**SVG animations**: Header uses inline SVG with `feTurbulence` and `feDisplacementMap` filters for starlight effect.
+**SVG animations**: Header includes 7 inline SVG filter effects:
+1. **Starlight Extinction** - Turbulent displacement with animated baseFrequency/scale
+
+**Animation configuration**: The `ANIMATION_CONFIG` object in main.js controls:
+- `defaultAnimation` - Animation shown on page load (null = none)
+- `animations` array - Defines available filters in cycle order
+
+To change the default animation, modify `ANIMATION_CONFIG.defaultAnimation` to any filter ID ('starlight-extinction', 'color-shift', etc.) or null for no animation.
 
 **PWA support**: Includes manifest.json and apple-touch-icons for progressive web app functionality.
 
