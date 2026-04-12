@@ -54,6 +54,20 @@ function animateHeader() {
       cycleAnimation();
     }
   });
+
+  // Improve touch handling for mobile devices
+  // Use touch-action CSS property and prevent double-tap zoom
+  h.style.touchAction = 'manipulation';
+
+  // Add touch feedback
+  h.addEventListener('touchstart', () => {
+    // Passive touch listener for better scroll performance
+    h.style.opacity = '0.9';
+  }, { passive: true });
+
+  h.addEventListener('touchend', () => {
+    h.style.opacity = '1';
+  }, { passive: true });
 }
 
 // Get current animation info (useful for debugging or UI display)

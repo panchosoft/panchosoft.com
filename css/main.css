@@ -44,6 +44,8 @@ html {
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
+  /* Improve touch interaction on mobile */
+  -webkit-tap-highlight-color: rgba(102, 153, 204, 0.3);
 }
 
 /* Body style */
@@ -140,12 +142,25 @@ img {
   height: 12vw;
   transition: all ease-out 100ms;
   z-index: 100;
+  /* Prevent double-tap zoom on mobile */
+  touch-action: manipulation;
 }
 
 .heading-svg svg:hover {
   animation: shine 0.5s forwards;
   transition: all ease-out 10ms;
   cursor: crosshair;
+}
+
+/* Remove cursor style on touch devices where hover doesn't make sense */
+@media (hover: none) {
+  .heading-svg svg:hover {
+    cursor: default;
+  }
+
+  .heading-svg svg {
+    cursor: pointer;
+  }
 }
 
 .heading-svg svg:not(:hover) {
@@ -156,6 +171,12 @@ img {
   outline: 3px solid #6699cc;
   outline-offset: 8px;
   border-radius: 4px;
+}
+
+/* Touch feedback for mobile devices */
+.heading-svg svg:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease-out;
 }
 
 /* Heart beat animation */
@@ -244,6 +265,13 @@ img {
   border-radius: 50%;
 }
 
+/* Remove help cursor on touch devices */
+@media (hover: none) {
+  .profile-picture img:hover {
+    cursor: default;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .profile-picture {
     width: 100%;
@@ -251,6 +279,16 @@ img {
   }
   .profile-text {
     text-align: center;
+  }
+
+  /* Ensure adequate touch targets on mobile (minimum 44x44px per WCAG) */
+  .social-list svg {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .main-list>li {
+    min-height: 50px;
   }
 }
 
@@ -352,6 +390,8 @@ img {
   height: clamp(60px, 10vw, 80px);
 
   transition: 0.2s ease-in-out;
+  /* Prevent double-tap zoom on mobile */
+  touch-action: manipulation;
 }
 
 .social-list svg:hover {
@@ -370,6 +410,12 @@ img {
   outline: 2px solid #6699cc;
   outline-offset: 6px;
   border-radius: 50%;
+}
+
+/* Touch feedback on mobile */
+.social-list a:active svg {
+  transform: scale(0.95);
+  transition: transform 0.1s ease-out;
 }
 
 /* Heart beat animation */
@@ -479,7 +525,8 @@ img {
   color: var(--main-txt-color);
   cursor: pointer;
   user-select: none;
-  touch-action: none;
+  /* Changed from none to manipulation for better mobile interaction */
+  touch-action: manipulation;
   flex-grow: 9;
   transition: all ease-in-out 1s;
 }
@@ -498,6 +545,12 @@ img {
   border-radius: 4px;
   color: #1b96e9;
   filter: drop-shadow(0 0 1em var(--main-gradient-color));
+}
+
+/* Touch feedback on mobile */
+.main-list li a:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease-out;
 }
 
 .main-list li a sup {
