@@ -30,8 +30,8 @@ function animateHeader() {
     h.setAttribute('filter', `url(#${ANIMATION_CONFIG.defaultAnimation})`);
   }
 
-  // Add click event to cycle through animations
-  h.addEventListener('click', () => {
+  // Function to cycle to next animation
+  const cycleAnimation = () => {
     currentIndex = (currentIndex + 1) % ANIMATION_CONFIG.animations.length;
     const animation = ANIMATION_CONFIG.animations[currentIndex];
 
@@ -41,6 +41,17 @@ function animateHeader() {
     } else {
       h.setAttribute('filter', `url(#${animation.id})`);
       console.log(`Animation: ${animation.name} - ${animation.description}`);
+    }
+  };
+
+  // Add click event to cycle through animations
+  h.addEventListener('click', cycleAnimation);
+
+  // Add keyboard support (Enter and Space keys)
+  h.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault(); // Prevent page scroll on Space
+      cycleAnimation();
     }
   });
 }

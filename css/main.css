@@ -75,6 +75,13 @@ a:active {
   color: #336699;
 }
 
+/* Focus styles for keyboard navigation */
+a:focus-visible {
+  outline: 2px solid #6699cc;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
 /* Headings style */
 h1,
 h2,
@@ -143,6 +150,12 @@ img {
 
 .heading-svg svg:not(:hover) {
   animation: darken .18s backwards;
+}
+
+.heading-svg svg:focus-visible {
+  outline: 3px solid #6699cc;
+  outline-offset: 8px;
+  border-radius: 4px;
 }
 
 /* Heart beat animation */
@@ -223,6 +236,12 @@ img {
   cursor: help;
   filter: drop-shadow(0 0 1em #c3d7bf);
   transition: all ease-out 1s;
+}
+
+.profile-picture img:focus-visible {
+  outline: 3px solid #c3d7bf;
+  outline-offset: 4px;
+  border-radius: 50%;
 }
 
 @media only screen and (max-width: 600px) {
@@ -347,6 +366,12 @@ img {
   /* transform-origin: center; */
 }
 
+.social-list a:focus-visible {
+  outline: 2px solid #6699cc;
+  outline-offset: 6px;
+  border-radius: 50%;
+}
+
 /* Heart beat animation */
 @keyframes beat {
   to {
@@ -465,6 +490,14 @@ img {
   color: #1b96e9;
   /* font-weight: 700; */
   filter: drop-shadow(0 0 2em var(--main-gradient-color));
+}
+
+.main-list li a:focus-visible {
+  outline: 2px solid #6699cc;
+  outline-offset: 6px;
+  border-radius: 4px;
+  color: #1b96e9;
+  filter: drop-shadow(0 0 1em var(--main-gradient-color));
 }
 
 .main-list li a sup {
