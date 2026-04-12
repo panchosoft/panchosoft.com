@@ -355,6 +355,7 @@ img {
   }
 }
 
+/* X (formerly Twitter) */
 .social-list svg[target="twitter"]:hover {
   color: #1d9bf0 !important;
 }
