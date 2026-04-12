@@ -11,6 +11,10 @@
   <meta name="robots" content="index,follow">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- Preconnect to external domains for faster loading -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
   <!-- Canonical URL -->
   <link rel="canonical" href="https://panchosoft.com/" />
 
@@ -30,6 +34,13 @@
 
   <!-- Theme Color -->
   <meta name="theme-color" content="#15202b" />
+
+  <!-- Preload critical assets for better performance -->
+  <link rel="preload" href="images/header.svg" as="image" fetchpriority="high" />
+  <link rel="preload" href="images/profile.jpg" as="image" />
+  <link rel="preload" href="fonts/Inter-Regular.woff2?v=3.19" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="fonts/Inter-Bold.woff2?v=3.19" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="fonts/Inter-Thin.woff2?v=3.19" as="font" type="font/woff2" crossorigin="anonymous" />
 
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/main.css" />
