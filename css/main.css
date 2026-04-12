@@ -1,28 +1,10 @@
+/* Using Inter Variable Font for better performance and flexibility */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 100;
+  font-weight: 100 900;
   font-display: swap;
-  src: url("../fonts/Inter-Thin.woff2?v=3.19") format("woff2"),
-    url("../fonts/Inter-Thin.woff?v=3.19") format("woff");
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("../fonts/Inter-Regular.woff2?v=3.19") format("woff2"),
-    url("../fonts/Inter-Regular.woff?v=3.19") format("woff");
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("../fonts/Inter-Bold.woff2?v=3.19") format("woff2"),
-    url("../fonts/Inter-Bold.woff?v=3.19") format("woff");
+  src: url("../fonts/InterVariable.ttf") format("truetype");
 }
 
 :root {
