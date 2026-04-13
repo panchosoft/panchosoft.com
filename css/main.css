@@ -155,10 +155,12 @@ img {
   border-radius: 4px;
 }
 
-/* Touch feedback for mobile devices */
-.heading-svg svg:active {
-  transform: scale(0.98);
-  transition: transform 0.1s ease-out;
+/* Touch feedback for mobile devices only */
+@media (hover: none) and (pointer: coarse) {
+  .heading-svg svg:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease-out;
+  }
 }
 
 /* Heart beat animation */
@@ -394,10 +396,12 @@ img {
   border-radius: 50%;
 }
 
-/* Touch feedback on mobile */
-.social-list a:active svg {
-  transform: scale(0.95);
-  transition: transform 0.1s ease-out;
+/* Touch feedback on mobile devices only */
+@media (hover: none) and (pointer: coarse) {
+  .social-list a:active svg {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-out;
+  }
 }
 
 /* Heart beat animation */
@@ -529,10 +533,12 @@ img {
   filter: drop-shadow(0 0 1em var(--main-gradient-color));
 }
 
-/* Touch feedback on mobile */
-.main-list li a:active {
-  transform: scale(0.98);
-  transition: transform 0.1s ease-out;
+/* Touch feedback on mobile devices only */
+@media (hover: none) and (pointer: coarse) {
+  .main-list li a:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease-out;
+  }
 }
 
 .main-list li a sup {
