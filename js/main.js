@@ -60,9 +60,11 @@ function animateHeader() {
   h.style.touchAction = 'manipulation';
 
   // Add touch feedback
+  const touchFeedbackOpacity = getComputedStyle(document.documentElement)
+    .getPropertyValue('--touch-feedback-opacity').trim();
   h.addEventListener('touchstart', () => {
     // Passive touch listener for better scroll performance
-    h.style.opacity = '0.9';
+    h.style.opacity = touchFeedbackOpacity;
   }, { passive: true });
 
   h.addEventListener('touchend', () => {
