@@ -30,7 +30,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^8.0.8"
+    "vite": "^8.0.10"
   },
   "engines": {
     "node": ">=18.0.0"
