@@ -1,0 +1,71 @@
+# GitHub Actions workflow to build and deploy panchosoft.com to AWS S3
+# Triggers on every push to main branch
+name: Deploy to AWS S3
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      # Setup Node.js environment with npm cache
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # Install dependencies using clean install (respects package-lock.json)
+      - name: Install dependencies
+        run: npm ci
+
+      # Build the Vite application (outputs to dist/)
+      - name: Build application
+        run: npm run build
+
+      # Configure AWS credentials from GitHub secrets
+      # Required secrets: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Deploy to S3 using two-pass sync strategy:
+      # 1. Upload static assets (JS, CSS, images) with long-term caching
+      # 2. Upload HTML and manifest with no-cache headers for immediate updates
+      # Note: Does NOT delete existing S3 files, only overwrites matching files
+      - name: Deploy to S3
+        run: |
+          aws s3 sync dist/ s3://${{ secrets.S3_BUCKET_NAME }}/ \
+            --cache-control "public,max-age=31536000,immutable" \
+            --exclude "*.html" \
+            --exclude "manifest.json"
+
+          aws s3 sync dist/ s3://${{ secrets.S3_BUCKET_NAME }}/ \
+            --exclude "*" \
+            --include "*.html" \
+            --include "manifest.json" \
+            --cache-control "public,max-age=0,must-revalidate"
+
+      # Optional: Invalidate CloudFront CDN cache if distribution ID is configured
+      # Add CLOUDFRONT_DISTRIBUTION_ID as a variable (not secret) to enable
+      - name: Invalidate CloudFront cache (optional)
+        if: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID != '' }}
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
