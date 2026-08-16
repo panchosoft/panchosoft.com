@@ -183,7 +183,18 @@ function updateYear() {
   if(y) y.innerHTML = new Date().getFullYear();
 }
 
+// Assigns a --stagger-index custom property to each child of the given
+// selectors so their CSS entrance animations cascade in document order.
+function applyStaggerIndices(selectors) {
+  selectors.forEach(selector => {
+    document.querySelectorAll(selector).forEach((el, index) => {
+      el.style.setProperty('--stagger-index', index);
+    });
+  });
+}
+
 // Start scripts
 rotateText(["Software Programmer", "Outer Heaven 📍🇲🇽🇺🇸"], 7);
 animateHeader();
+applyStaggerIndices([".social-list > li", ".main-list > li"]);
 document.addEventListener("DOMContentLoaded", updateYear);
