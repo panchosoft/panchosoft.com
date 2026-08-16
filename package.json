@@ -1,6 +1,6 @@
 {
   "name": "panchosoft",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "type": "module",
   "description": "Modern and responsive homepage for Panchosoft.com built with Vite.",
