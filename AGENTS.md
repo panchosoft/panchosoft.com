@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI coding agents (Claude Code, etc.) when working with code in this repository.
 
 ## Project Overview
 
@@ -28,6 +28,7 @@ npm run preview
 - `css/` - Stylesheets (reset.css, main.css)
 - `public/` - Static assets served as-is (icons, images, fonts, manifest.json)
 - `vite.config.js` - Vite configuration with `base: "./"` for relative paths
+- `ANIMATIONS.md` - Reference doc for configuring the SVG header animation system
 
 ## Architecture
 
@@ -38,6 +39,7 @@ npm run preview
 - `rotateText(strings, config)` - Character-by-character typing effect with delete animation
 - `updateYear()` - Updates copyright year dynamically
 - `getCurrentAnimation()` - Returns current animation info (debugging/UI helper)
+- `applyStaggerIndices(selectors)` - Sets a `--stagger-index` custom property on each matched element so CSS entrance animations cascade in document order (used for `.social-list > li` and `.main-list > li`)
 
 **Typing effect**: Improved character-by-character implementation with:
 - Real-time typing and deleting animations (not CSS-based)
@@ -51,7 +53,9 @@ npm run preview
 - `defaultAnimation` - Animation shown on page load (null = none)
 - `animations` array - Defines available filters in cycle order
 
-To change the default animation, modify `ANIMATION_CONFIG.defaultAnimation` to any filter ID ('starlight-extinction', 'color-shift', etc.) or null for no animation.
+To change the default animation, modify `ANIMATION_CONFIG.defaultAnimation` to any filter ID ('starlight-extinction', 'color-shift', etc.) or null for no animation. See `ANIMATIONS.md` for the full configuration reference and examples.
+
+**List entrance animations**: Social and main nav list items (`.social-list > li`, `.main-list > li`) use staggered CSS entrance animations driven by the `--stagger-index` custom property set via `applyStaggerIndices()`. Adjust timing/easing in `css/main.css`.
 
 **PWA support**: Includes manifest.json and apple-touch-icons for progressive web app functionality.
 
