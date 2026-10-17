@@ -184,8 +184,34 @@ function applyStaggerIndices(selectors) {
   });
 }
 
+// On desktop widths, when the stacked profile (picture above text) makes the page
+// taller than the viewport, put the picture to the left of the text to save height.
+// Always measured in the stacked state, so the layout can't flip back and forth.
+function initCompactProfile() {
+  const profile = document.querySelector(".profile");
+  const footer = document.querySelector("footer");
+  if (!profile || !footer) return;
+
+  const desktop = window.matchMedia("(min-width: 601px)");
+
+  const update = () => {
+    profile.classList.remove("profile-inline");
+    // offsetTop/offsetHeight ignore the entrance animation's transforms
+    const pageHeight = footer.offsetTop + footer.offsetHeight;
+    if (desktop.matches && pageHeight > window.innerHeight) {
+      profile.classList.add("profile-inline");
+    }
+  };
+
+  update();
+  window.addEventListener("resize", update);
+  window.addEventListener("load", update);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(update);
+}
+
 // Start scripts
 rotateText(["Software Programmer", "Outer Heaven 📍🇲🇽🇺🇸"], { pauseAfterType: 5000 });
 animateHeader();
+initCompactProfile();
 applyStaggerIndices([".social-list > li", ".main-list > li"]);
 document.addEventListener("DOMContentLoaded", updateYear);

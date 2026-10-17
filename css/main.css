@@ -42,6 +42,9 @@
   --touch-feedback-opacity: 0.9;
 
   /* Spacing and sizing */
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
   --border-radius-small: 2px;
   --border-radius-medium: 4px;
   --border-radius-large: 6px;
@@ -133,7 +136,12 @@ img {
 }
 
 .inner {
-  padding-top: 25px;
+  padding-top: var(--space-md);
+}
+
+/* Vertical rhythm: 24px between header, profile and icons, 40px before the links */
+#nav-main {
+  padding-top: var(--space-lg);
 }
 
 .noise::before {
@@ -291,7 +299,7 @@ img {
   border-radius: 50%;
   width: clamp(100px, 10vw, 140px);
   height: auto; /* keeps the aspect ratio from the width/height attributes */
-  margin: 0 0 16px;
+  margin: 0 0 var(--space-sm);
   user-select: none;
   touch-action: none;
   -moz-user-drag: none;
@@ -316,6 +324,29 @@ img {
   .profile-picture img:hover {
     cursor: default;
   }
+}
+
+/* Compact profile: picture floats left of the text. js/main.js adds .profile-inline
+   when the stacked layout is taller than the viewport (desktop widths only). */
+.profile.profile-inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.profile.profile-inline .profile-picture img {
+  margin: 0 18px 0 0;
+}
+
+.profile.profile-inline .profile-text {
+  width: auto;
+  text-align: left;
+}
+
+.profile.profile-inline .typewriter {
+  justify-content: flex-start;
+  margin: 0;
 }
 
 @media only screen and (max-width: 600px) {
@@ -616,7 +647,7 @@ img {
 .footer {
   margin: 0 auto;
   text-align: center;
-  margin-top: 40px;
+  margin-top: var(--space-lg);
   font-size: 13px;
   animation: reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
 }
