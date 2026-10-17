@@ -37,7 +37,7 @@
   --glow-color: rgba(81, 140, 163, 0.8);
 
   /* Opacity values */
-  --noise-opacity: 0.025;
+  --noise-opacity: 0.035;
   --tap-highlight-opacity: 0.3;
   --touch-feedback-opacity: 0.9;
 
@@ -136,7 +136,10 @@ img {
 }
 
 .noise::before {
-  background-image: url("/images/noise.gif");
+  /* Procedural grain tile (SVG feTurbulence), replaces the 756 KB noise.gif */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='4 0 0 0 -1.5 4 0 0 0 -1.5 4 0 0 0 -1.5 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  animation: noise-shift 0.8s steps(1) infinite;
   position: fixed;
   content: "";
   opacity: var(--noise-opacity);
@@ -150,6 +153,18 @@ img {
   /* position: absolute; */
   top: 0;
   width: 100vw;
+}
+
+/* Jumps the grain tile around to mimic the old animated GIF */
+@keyframes noise-shift {
+  0% { background-position: 0 0; }
+  12.5% { background-position: -40px 60px; }
+  25% { background-position: 90px -30px; }
+  37.5% { background-position: -70px -90px; }
+  50% { background-position: 30px 110px; }
+  62.5% { background-position: -110px 20px; }
+  75% { background-position: 60px 80px; }
+  87.5% { background-position: -20px -60px; }
 }
 
 .heading-svg {
@@ -624,6 +639,10 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .noise::before {
+    animation: none;
+  }
+
   .heading-svg,
   .profile,
   .social-list li,
