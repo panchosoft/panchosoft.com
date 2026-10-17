@@ -140,6 +140,14 @@ function rotateText(strings, secondsOrConfig) {
   let currentText = "";
   let isDeleting = false;
   let charIndex = 0;
+  let timerId = null;
+  let pendingStep = null;
+
+  // Schedules the next step and remembers it so it can be resumed after a pause
+  function schedule(step, delay) {
+    pendingStep = step;
+    timerId = setTimeout(step, delay);
+  }
 
   function type() {
     const targetText = strings[currentIndex];
@@ -150,10 +158,10 @@ function rotateText(strings, secondsOrConfig) {
         currentText = targetText.substring(0, charIndex + 1);
         textSpan.textContent = currentText;
         charIndex++;
-        setTimeout(type, config.typeSpeed + Math.random() * 50); // Add slight randomness
+        schedule(type, config.typeSpeed + Math.random() * 50); // Add slight randomness
       } else {
         // Finished typing, pause then start deleting
-        setTimeout(() => {
+        schedule(() => {
           isDeleting = true;
           type();
         }, config.pauseAfterType);
@@ -164,15 +172,25 @@ function rotateText(strings, secondsOrConfig) {
         currentText = targetText.substring(0, charIndex - 1);
         textSpan.textContent = currentText;
         charIndex--;
-        setTimeout(type, config.deleteSpeed);
+        schedule(type, config.deleteSpeed);
       } else {
         // Finished deleting, move to next string
         isDeleting = false;
         currentIndex = (currentIndex + 1) % strings.length;
-        setTimeout(type, config.pauseAfterDelete);
+        schedule(type, config.pauseAfterDelete);
       }
     }
   }
+
+  // Pause while the tab is hidden and resume where it left off when visible again
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      clearTimeout(timerId);
+      timerId = null;
+    } else if (timerId === null && pendingStep) {
+      schedule(pendingStep, 0);
+    }
+  });
 
   // Start the typing effect
   type();
