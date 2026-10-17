@@ -280,11 +280,8 @@ img {
 
 .profile {
   display: flex;
-  justify-content: center;
-  /* flex-direction: column; */
-  flex-wrap: wrap;
-  align-items: flex-start;
-  align-content: center;
+  flex-direction: column;
+  align-items: center;
   z-index: 50;
   animation: reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
 }
@@ -293,7 +290,7 @@ img {
   border-radius: 50%;
   width: clamp(100px, 10vw, 140px);
   height: auto; /* keeps the aspect ratio from the width/height attributes */
-  margin-right: 18px;
+  margin: 0 0 16px;
   user-select: none;
   touch-action: none;
   -moz-user-drag: none;
@@ -321,14 +318,6 @@ img {
 }
 
 @media only screen and (max-width: 600px) {
-  .profile-picture {
-    width: 100%;
-    text-align: center;
-  }
-  .profile-text {
-    text-align: center;
-  }
-
   /* Ensure adequate touch targets on mobile (minimum 44x44px per WCAG) */
   .social-list svg {
     min-width: 44px;
@@ -341,6 +330,8 @@ img {
 }
 
 .profile-text {
+  width: 100%;
+  text-align: center;
   transition: all ease-out 100ms;
   filter: drop-shadow(0.15em 0.1em 0.3em var(--main-gradient-color));
   font-size: clamp(20px, 12.9577464789px + 1.4084507042vw, 35px);
@@ -367,8 +358,10 @@ img {
 /* DEMO-SPECIFIC STYLES */
 .typewriter {
   display: flex;
-  justify-content: left;
+  justify-content: center;
   max-width: fit-content;
+  min-height: 1.5em; /* keeps the line height stable while text is deleted */
+  margin: 0 auto;
 }
 
 .typewriter span {
