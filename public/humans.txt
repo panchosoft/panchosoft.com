@@ -1,0 +1,11 @@
+/* TEAM */
+Developer: Francisco Leyva
+Site: https://panchosoft.com
+GitHub: https://github.com/panchosoft
+Location: Mexico
+
+/* SITE */
+Source: https://github.com/panchosoft/panchosoft.com
+Standards: HTML5, CSS3, ES modules
+Components: Vite, Inter variable font
+Software: Vanilla JavaScript, no frameworks
