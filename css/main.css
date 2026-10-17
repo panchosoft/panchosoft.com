@@ -339,18 +339,6 @@ img {
   }
 }
 
-.profile .verified-logo {
-  width: clamp(12px, 12px + 1.5vw, 22px);
-  height: clamp(12px, 12px + 1.5vw, 22px);
-  /* vertical-align:top; */
-  margin: 0;
-  padding: 0;
-  margin-left: 0px;
-  transition: all ease-out 100ms;
-  vertical-align: auto;
-  /* cursor: pointer; */
-}
-
 .profile-text {
   transition: all ease-out 100ms;
   filter: drop-shadow(0.15em 0.1em 0.3em var(--main-gradient-color));

@@ -38,14 +38,12 @@ npm run preview
 - `animateHeader()` - Cycles through SVG filter animations on header click
 - `rotateText(strings, config)` - Character-by-character typing effect with delete animation
 - `updateYear()` - Updates copyright year dynamically
-- `getCurrentAnimation()` - Returns current animation info (debugging/UI helper)
 - `applyStaggerIndices(selectors)` - Sets a `--stagger-index` custom property on each matched element so CSS entrance animations cascade in document order (used for `.social-list > li` and `.main-list > li`)
 
 **Typing effect**: Improved character-by-character implementation with:
 - Real-time typing and deleting animations (not CSS-based)
 - Configurable speeds via `TYPING_CONFIG` object
 - Random timing variance for natural feel
-- Backward compatible with legacy seconds parameter
 
 **SVG animations**: Header includes inline SVG filter effects like Starlight Extinction
 

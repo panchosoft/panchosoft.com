@@ -37,10 +37,8 @@ function animateHeader() {
 
     if (animation.id === null) {
       h.removeAttribute('filter');
-      console.log(`Animation: ${animation.name}`);
     } else {
       h.setAttribute('filter', `url(#${animation.id})`);
-      console.log(`Animation: ${animation.name} - ${animation.description}`);
     }
   };
 
@@ -72,18 +70,6 @@ function animateHeader() {
   }, { passive: true });
 }
 
-// Get current animation info (useful for debugging or UI display)
-function getCurrentAnimation() {
-  const h = document.querySelector("#header-svg");
-  if (!h) return null;
-
-  const filter = h.getAttribute('filter');
-  if (!filter) return ANIMATION_CONFIG.animations[0];
-
-  const animId = filter.match(/#([^)]+)/)?.[1];
-  return ANIMATION_CONFIG.animations.find(anim => anim.id === animId) || null;
-}
-
 // Typing effect configuration
 const TYPING_CONFIG = {
   typeSpeed: 80,        // Milliseconds per character when typing
@@ -94,22 +80,9 @@ const TYPING_CONFIG = {
 };
 
 // Enhanced typewriter effect with character-by-character typing and deleting
-// Supports both legacy seconds parameter and new config object
-function rotateText(strings, secondsOrConfig) {
-  let config = {};
-
-  // Handle legacy seconds parameter for backward compatibility
-  if (typeof secondsOrConfig === "number") {
-    const displayTime = secondsOrConfig * 1000;
-    config = {
-      ...TYPING_CONFIG,
-      pauseAfterType: Math.max(1000, displayTime - 2000)
-    };
-  } else if (secondsOrConfig) {
-    config = { ...TYPING_CONFIG, ...secondsOrConfig };
-  } else {
-    config = { ...TYPING_CONFIG };
-  }
+// Options override TYPING_CONFIG
+function rotateText(strings, options) {
+  const config = { ...TYPING_CONFIG, ...options };
 
   const container = document.getElementById("typewriter");
 
@@ -198,7 +171,7 @@ function rotateText(strings, secondsOrConfig) {
 
 function updateYear() {
   var y = document.getElementById("year")
-  if(y) y.innerHTML = new Date().getFullYear();
+  if(y) y.textContent = new Date().getFullYear();
 }
 
 // Assigns a --stagger-index custom property to each child of the given
@@ -212,7 +185,7 @@ function applyStaggerIndices(selectors) {
 }
 
 // Start scripts
-rotateText(["Software Programmer", "Outer Heaven 📍🇲🇽🇺🇸"], 7);
+rotateText(["Software Programmer", "Outer Heaven 📍🇲🇽🇺🇸"], { pauseAfterType: 5000 });
 animateHeader();
 applyStaggerIndices([".social-list > li", ".main-list > li"]);
 document.addEventListener("DOMContentLoaded", updateYear);
