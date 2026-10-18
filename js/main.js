@@ -102,6 +102,12 @@ function rotateText(strings, options) {
   textSpan.setAttribute("aria-live", "polite");
   container.appendChild(textSpan);
 
+  // Reduced motion: show the first string as static text, no typing or cursor
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    textSpan.textContent = strings[0];
+    return;
+  }
+
   if (config.cursorBlink) {
     const cursor = document.createElement("span");
     cursor.className = "cursor";
