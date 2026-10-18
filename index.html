@@ -10,7 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <!-- Preconnect to external domains for faster loading -->
-  <link rel="preconnect" href="https://www.googletagmanager.com" />
   <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
   <!-- Canonical URL -->
@@ -61,14 +60,27 @@
   <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNND50LTT0"></script>
+  <!-- Google tag (gtag.js), loaded after the page load event, when the browser is idle -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-JNND50LTT0');
+
+    (function () {
+      function loadAnalytics() {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-JNND50LTT0';
+        document.head.appendChild(s);
+      }
+      function whenIdle() {
+        if ('requestIdleCallback' in window) requestIdleCallback(loadAnalytics, { timeout: 4000 });
+        else setTimeout(loadAnalytics, 1);
+      }
+      if (document.readyState === 'complete') whenIdle();
+      else window.addEventListener('load', whenIdle);
+    })();
   </script>
 
   <!-- Structured data -->
