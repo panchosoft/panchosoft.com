@@ -13,11 +13,13 @@ const ANIMATION_CONFIG = {
 // This function cycles through SVG filter animations on the header element when clicked.
 // Click repeatedly to cycle through all available animations.
 function animateHeader() {
-  var h = document.querySelector("#header-svg");
+  const h = document.querySelector("#header-svg");
   if (!h) {
     console.error("AnimateHeader: header-svg element not found.");
     return;
   }
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   // Initialize with default animation
   let currentIndex = ANIMATION_CONFIG.animations.findIndex(
@@ -26,12 +28,31 @@ function animateHeader() {
   if (currentIndex === -1) currentIndex = 0;
 
   // Apply default animation if set
-  if (ANIMATION_CONFIG.defaultAnimation) {
+  if (!reducedMotion.matches && ANIMATION_CONFIG.defaultAnimation) {
     h.setAttribute('filter', `url(#${ANIMATION_CONFIG.defaultAnimation})`);
   }
 
+  const updateAnimationControl = () => {
+    if (reducedMotion.matches) {
+      h.removeAttribute('filter');
+      h.setAttribute('role', 'img');
+      h.setAttribute('aria-label', 'Panchosoft logo');
+      h.setAttribute('tabindex', '-1');
+      h.style.pointerEvents = 'none';
+    } else {
+      h.setAttribute('role', 'button');
+      h.setAttribute('aria-label', 'Cycle through header animations');
+      h.setAttribute('tabindex', '0');
+      h.style.pointerEvents = '';
+    }
+  };
+  updateAnimationControl();
+  reducedMotion.addEventListener('change', updateAnimationControl);
+
   // Function to cycle to next animation
   const cycleAnimation = () => {
+    if (reducedMotion.matches) return;
+
     currentIndex = (currentIndex + 1) % ANIMATION_CONFIG.animations.length;
     const animation = ANIMATION_CONFIG.animations[currentIndex];
 
@@ -99,12 +120,18 @@ function rotateText(strings, options) {
   // Create text span and cursor
   const textSpan = document.createElement("span");
   textSpan.setAttribute("id", "rotatingText");
-  textSpan.setAttribute("aria-live", "polite");
   container.appendChild(textSpan);
+
+  const announcement = document.createElement("span");
+  announcement.className = "visually-hidden";
+  announcement.setAttribute("aria-live", "polite");
+  announcement.setAttribute("aria-atomic", "true");
+  container.appendChild(announcement);
 
   // Reduced motion: show the first string as static text, no typing or cursor
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     textSpan.textContent = strings[0];
+    announcement.textContent = strings[0];
     return;
   }
 
@@ -139,6 +166,7 @@ function rotateText(strings, options) {
         charIndex++;
         schedule(type, config.typeSpeed + Math.random() * 50); // Add slight randomness
       } else {
+        announcement.textContent = targetText;
         // Finished typing, pause then start deleting
         schedule(() => {
           isDeleting = true;
