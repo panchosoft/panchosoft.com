@@ -6,8 +6,6 @@ This document describes the configurable SVG animation system for the header log
 
 **Interactive**: Click the header logo to cycle through all available animations.
 
-**Console feedback**: Each click logs the current animation name and description to the browser console.
-
 ## Configuration
 
 Edit `ANIMATION_CONFIG` in `js/main.js` to customize behavior:

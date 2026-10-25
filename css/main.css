@@ -214,7 +214,7 @@ img {
   animation: darken .18s backwards;
 }
 
-.heading-svg svg:focus-visible {
+#header-svg:focus-visible {
   outline: 3px solid var(--focus-outline-color);
   outline-offset: 8px;
   border-radius: var(--border-radius-medium);
@@ -394,6 +394,18 @@ img {
   max-width: fit-content;
   min-height: 1.5em; /* keeps the line height stable while text is deleted */
   margin: 0 auto;
+}
+
+.typewriter .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .typewriter span {
@@ -664,5 +676,9 @@ img {
   .footer {
     animation: none;
     opacity: 1;
+  }
+
+  .typewriter .cursor {
+    animation: none;
   }
 }
