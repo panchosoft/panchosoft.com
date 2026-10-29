@@ -59,7 +59,7 @@ To change the default animation, modify `ANIMATION_CONFIG.defaultAnimation` to a
 
 ## Technical Constraints
 
-- Requires Node.js >=18.0.0
+- Requires Node.js ^20.19.0 or >=22.12.0 (matching Vite's engine requirement)
 - No TypeScript, no build-time compilation
 - No test suite or linting configured
 - Google Analytics is hardcoded in index.html (ID: G-JNND50LTT0)
